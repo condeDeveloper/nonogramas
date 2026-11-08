@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nonogramas — quantas imagens as dicas determinam sozinhas</title>
+<meta name="description" content="Todas as 33.554.432 imagens de uma caixa 5x5 varridas e agrupadas pelas dicas que produzem: 75,43% tem dicas que as determinam sozinhas, e 1,32% dessas ainda exigem chute.">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<header>
+  <h1>Nonogramas</h1>
+  <p>As dicas de uma imagem determinam a imagem? Nem sempre — e quando determinam, nem sempre a lógica linha a linha chega lá.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Resolva</h2>
+  <div class="painel">
+    <div class="linha" style="margin-bottom:14px">
+      <select id="tamanho">
+        <option value="5">5 × 5</option>
+        <option value="4">4 × 4</option>
+        <option value="6">6 × 6</option>
+        <option value="8">8 × 8</option>
+      </select>
+      <button id="nova">Nova imagem</button>
+      <button id="dica">O que a propagação sabe</button>
+      <button id="revelar">Mostrar a solução</button>
+      <button id="patologico">O puzzle que a lógica não começa</button>
+    </div>
+    <canvas id="tela" width="560" height="560"></canvas>
+    <p id="estado" style="margin:14px 0 0"></p>
+    <p style="margin:6px 0 0;color:var(--fraco);font-size:0.9rem">
+      Clique para preencher. Clique com o botão direito (ou segure Shift) para marcar como vazia.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>O que a varredura achou</h2>
+  <div class="painel">
+    <table>
+      <thead>
+        <tr><th>caixa</th><th>imagens</th><th>dicas distintas</th><th>só uma imagem</th><th>fração</th><th>maior ambiguidade</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>3 × 3</td><td>512</td><td>445</td><td>384</td><td>75,00%</td><td>6</td></tr>
+        <tr><td>4 × 4</td><td>65.536</td><td>58.196</td><td>52.362</td><td>79,90%</td><td>24</td></tr>
+        <tr><td>5 × 4</td><td>1.048.576</td><td>915.743</td><td>814.632</td><td>77,69%</td><td>36</td></tr>
+        <tr><td>5 × 5</td><td>33.554.432</td><td>28.781.820</td><td>25.309.575</td><td>75,43%</td><td>120</td></tr>
+        <tr><td>6 × 5</td><td>1.073.741.824</td><td>909.340.930</td><td>794.378.773</td><td>73,98%</td><td>240</td></tr>
+      </tbody>
+    </table>
+    <p style="margin:14px 0 0;color:var(--fraco);font-size:0.92rem">
+      Toda caixa foi varrida inteira, imagem por imagem. Os números saem de
+      <code>node ferramentas/medidor.js</code> e estão presos em teste.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>A lógica linha a linha não basta</h2>
+  <div class="painel">
+    <table>
+      <thead>
+        <tr><th>caixa</th><th>solução única</th><th>a propagação resolve</th><th>sobram</th><th>fração</th><th>casas em aberto</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>3 × 3</td><td>384</td><td>384</td><td>0</td><td>0,00%</td><td>0</td></tr>
+        <tr><td>4 × 3</td><td>3.152</td><td>3.116</td><td>36</td><td>1,14%</td><td>8</td></tr>
+        <tr><td>4 × 4</td><td>52.362</td><td>51.234</td><td>1.128</td><td>2,15%</td><td>16</td></tr>
+        <tr><td>5 × 4</td><td>814.632</td><td>801.832</td><td>12.800</td><td>1,57%</td><td>20</td></tr>
+        <tr><td>5 × 5</td><td>25.309.575</td><td>24.976.511</td><td>333.064</td><td>1,32%</td><td>25</td></tr>
+      </tbody>
+    </table>
+    <p style="margin:14px 0 0;color:var(--fraco);font-size:0.92rem">
+      A última coluna é o pior caso: na 5 × 5 existe puzzle com uma solução só em que a
+      propagação não decide <span class="forte">nenhuma</span> das 25 casas. O botão acima mostra o da 4 × 4.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>
+    <a href="https://github.com/condeDeveloper/nonogramas">Código e números no GitHub</a> ·
+    JavaScript puro, sem dependência e sem build.
+  </p>
+</footer>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
